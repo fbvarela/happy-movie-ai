@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Home",
+    "discover": "Discover",
+    "watchlist": "Watchlist",
+    "recommend": "AI Recommend",
+    "ai": "AI",
+    "library": "Library",
+    "collections": "Collections",
+    "reviews": "Reviews",
+    "stats": "Stats",
+    "settings": "Settings"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "loading": "Loading...",
+    "noResults": "No results found",
+    "confirm": "Confirm",
+    "back": "Back"
+  },
+  "home": {
+    "title": "Welcome to HappyMovie",
+    "subtitle": "Your AI-powered movie companion",
+    "trending": "Trending Now",
+    "recentlyWatched": "Recently Watched",
+    "recommended": "Recommended for You"
+  },
+  "discover": {
+    "title": "Discover Movies",
+    "subtitle": "Explore new films and series",
+    "searchPlaceholder": "Search movies, directors, actors..."
+  },
+  "watchlist": {
+    "title": "My Watchlist",
+    "subtitle": "Movies you want to watch",
+    "empty": "Your watchlist is empty. Discover movies and add them here!"
+  },
+  "recommend": {
+    "title": "AI Recommendations",
+    "subtitle": "Get personalized suggestions powered by AI",
+    "askPlaceholder": "Describe what kind of movie you're in the mood for..."
+  },
+  "collections": {
+    "title": "My Collections",
+    "subtitle": "Organize your movies into custom collections"
+  },
+  "reviews": {
+    "title": "My Reviews",
+    "subtitle": "Your thoughts on movies you've watched"
+  },
+  "stats": {
+    "title": "Viewing Stats",
+    "subtitle": "Insights into your movie watching habits",
+    "moviesWatched": "Movies Watched",
+    "hoursSpent": "Hours Spent",
+    "topGenre": "Top Genre",
+    "avgRating": "Avg Rating"
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage your account and preferences"
+  }
+}
