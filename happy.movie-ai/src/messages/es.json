@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "discover": "Descubrir",
+    "watchlist": "Por ver",
+    "recommend": "IA Recomienda",
+    "ai": "IA",
+    "library": "Biblioteca",
+    "collections": "Colecciones",
+    "reviews": "Reseñas",
+    "stats": "Estadísticas",
+    "settings": "Ajustes"
+  },
+  "common": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "add": "Añadir",
+    "search": "Buscar",
+    "loading": "Cargando...",
+    "noResults": "No se encontraron resultados",
+    "confirm": "Confirmar",
+    "back": "Volver"
+  },
+  "home": {
+    "title": "Bienvenido a HappyMovie",
+    "subtitle": "Tu compañero de cine con inteligencia artificial",
+    "trending": "Tendencias",
+    "recentlyWatched": "Visto recientemente",
+    "recommended": "Recomendado para ti"
+  },
+  "discover": {
+    "title": "Descubrir películas",
+    "subtitle": "Explora nuevas películas y series",
+    "searchPlaceholder": "Buscar películas, directores, actores..."
+  },
+  "watchlist": {
+    "title": "Mi lista de pendientes",
+    "subtitle": "Películas que quieres ver",
+    "empty": "Tu lista está vacía. ¡Descubre películas y añádelas aquí!"
+  },
+  "recommend": {
+    "title": "Recomendaciones IA",
+    "subtitle": "Sugerencias personalizadas con inteligencia artificial",
+    "askPlaceholder": "Describe qué tipo de película te apetece ver..."
+  },
+  "collections": {
+    "title": "Mis colecciones",
+    "subtitle": "Organiza tus películas en colecciones personalizadas"
+  },
+  "reviews": {
+    "title": "Mis reseñas",
+    "subtitle": "Tus opiniones sobre las películas que has visto"
+  },
+  "stats": {
+    "title": "Estadísticas",
+    "subtitle": "Información sobre tus hábitos cinematográficos",
+    "moviesWatched": "Películas vistas",
+    "hoursSpent": "Horas invertidas",
+    "topGenre": "Género favorito",
+    "avgRating": "Puntuación media"
+  },
+  "settings": {
+    "title": "Ajustes",
+    "subtitle": "Gestiona tu cuenta y preferencias"
+  }
+}
