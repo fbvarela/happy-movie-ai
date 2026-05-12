@@ -33,7 +33,8 @@
   "discover": {
     "title": "Descubrir películas",
     "subtitle": "Explora nuevas películas y series",
-    "searchPlaceholder": "Buscar películas, directores, actores..."
+    "searchPlaceholder": "Buscar películas, directores, actores...",
+    "filters": "Filtros"
   },
   "watchlist": {
     "title": "Mi lista de pendientes",
@@ -64,5 +65,18 @@
   "settings": {
     "title": "Ajustes",
     "subtitle": "Gestiona tu cuenta y preferencias"
+  },
+  "sources": {
+    "checking": "Buscando fuentes gratuitas...",
+    "none": "No se encontraron fuentes gratuitas para esta película",
+    "watchNow": "Ver ahora",
+    "watchOn": "Ver en {source}",
+    "internetArchive": "Internet Archive",
+    "youtube": "YouTube",
+    "quality": {
+      "hd": "HD",
+      "sd": "SD",
+      "low": "Baja calidad"
+    }
   }
 }

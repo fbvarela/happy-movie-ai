@@ -1,16 +1,17 @@
 "use client";
 
 import { createContext, useContext, useState, useCallback } from "react";
+import { Check, X, AlertTriangle, Info } from "lucide-react";
 
 const ToastContext = createContext(null);
 
 let _nextId = 0;
 
 const ICONS = {
-  success: "✓",
-  error: "✕",
-  warning: "⚠",
-  info: "ℹ",
+  success: <Check size={16} />,
+  error: <X size={16} />,
+  warning: <AlertTriangle size={16} />,
+  info: <Info size={16} />,
 };
 
 export function ToastProvider({ children }) {

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import { X } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
@@ -56,7 +57,7 @@ export default function BottomNav({ navItems, logo }) {
             <span>{logo.icon}</span>
             <span>{logo.name}</span>
           </div>
-          <button className="nav-drawer-close" onClick={() => setDrawerOpen(false)} aria-label="Close">✕</button>
+          <button className="nav-drawer-close" onClick={() => setDrawerOpen(false)} aria-label="Close"><X size={20} /></button>
         </div>
 
         <div style={{ flex: 1, overflowY: "auto", padding: "8px 0" }}>
