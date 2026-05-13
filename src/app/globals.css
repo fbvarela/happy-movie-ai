@@ -1169,6 +1169,165 @@ select.input { cursor: pointer; }
 }
 .spin { animation: spin 1s linear infinite; }
 
+/* ── Login page ───────────────────────────────────────── */
+.login-card {
+  max-width: 420px;
+  margin: 40px auto;
+  text-align: center;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+.login-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.login-input-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.login-input {
+  padding-left: 42px !important;
+  width: 100%;
+}
+.login-submit { width: 100%; justify-content: center; }
+.login-error {
+  color: var(--clay);
+  font-size: 0.85rem;
+}
+.login-notice {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 16px 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.dark .login-notice { background: rgba(255,255,255,0.04); }
+.login-sent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* ── Watchlist button ─────────────────────────────────── */
+.watchlist-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0,0,0,0.5);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.15s;
+  z-index: 2;
+  opacity: 0;
+}
+.movie-card:hover .watchlist-btn,
+.watchlist-btn.active { opacity: 1; }
+.watchlist-btn--sm { width: 30px; height: 30px; }
+.watchlist-btn:hover { transform: scale(1.1); }
+.watchlist-btn.active { color: var(--clay); }
+
+/* ── Rating stars ─────────────────────────────────────── */
+.rating-stars {
+  display: inline-flex;
+  gap: 2px;
+}
+.rating-star {
+  background: none;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.rating-star:not(:disabled):hover { transform: scale(1.2); }
+.rating-star:disabled { cursor: default; }
+
+/* ── Mark watched ─────────────────────────────────────── */
+.mark-watched-btn { margin-top: 0; }
+.mark-watched-rating {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.mark-watched-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.mark-watched-done {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--leaf);
+}
+
+/* ── Movie detail actions row ─────────────────────────── */
+.movie-detail-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+}
+.movie-detail-actions .watchlist-btn {
+  position: static;
+  opacity: 1;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  color: var(--text);
+  width: auto;
+  height: auto;
+  padding: 8px 16px;
+  border-radius: 99px;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+.dark .movie-detail-actions .watchlist-btn { background: rgba(255,255,255,0.06); }
+
+/* ── Watchlist page grid ──────────────────────────────── */
+.watchlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+.watchlist-item { position: relative; }
+.watchlist-remove-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0,0,0,0.6);
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.watchlist-item:hover .watchlist-remove-btn { opacity: 1; }
+.watchlist-remove-btn:hover { background: var(--clay); }
+
 /* ── Animations ────────────────────────────────────────── */
 @keyframes fadeIn {
   from { opacity: 0; }

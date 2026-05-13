@@ -66,6 +66,18 @@
     "title": "Ajustes",
     "subtitle": "Gestiona tu cuenta y preferencias"
   },
+  "auth": {
+    "title": "Iniciar sesión",
+    "subtitle": "Inicia sesión con tu email para guardar películas y ver tu historial",
+    "signIn": "Iniciar sesión",
+    "signOut": "Cerrar sesión",
+    "emailPlaceholder": "tu@email.com",
+    "sendMagicLink": "Enviar enlace mágico",
+    "sending": "Enviando...",
+    "checkEmail": "¡Revisa tu email!",
+    "magicLinkSent": "Hemos enviado un enlace mágico a {email}. Haz clic para iniciar sesión.",
+    "loginRequired": "Inicia sesión para acceder a tu lista"
+  },
   "sources": {
     "checking": "Buscando fuentes gratuitas...",
     "none": "No se encontraron fuentes gratuitas para esta película",

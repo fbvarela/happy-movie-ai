@@ -1,10 +1,10 @@
 "use client";
 
-import { Archive, Youtube } from "lucide-react";
+import { Archive, PlayCircle } from "lucide-react";
 
 const SOURCE_CONFIG = {
   "internet-archive": { icon: Archive, label: "Internet Archive", className: "source-badge source-badge--ia" },
-  "youtube": { icon: Youtube, label: "YouTube", className: "source-badge source-badge--yt" },
+  "youtube": { icon: PlayCircle, label: "YouTube", className: "source-badge source-badge--yt" },
 };
 
 export default function SourceBadge({ source, size = "default" }) {

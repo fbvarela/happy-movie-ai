@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Clapperboard, Star } from "lucide-react";
 import { posterUrl } from "@/lib/tmdb";
 import { TMDB_GENRE_MAP } from "@/constants/filters";
+import WatchlistButton from "@/components/WatchlistButton";
 
 export default function MovieCard({ movie }) {
   const year = movie.release_date?.slice(0, 4);
@@ -28,6 +29,12 @@ export default function MovieCard({ movie }) {
         {rating && rating > 0 && (
           <span className="movie-card-rating"><Star size={14} fill="var(--sun)" stroke="var(--sun)" /> {rating}</span>
         )}
+        <WatchlistButton
+          tmdbId={movie.id}
+          title={movie.title}
+          posterPath={movie.poster_path}
+          size="sm"
+        />
       </div>
       <div className="movie-card-info">
         <h3 className="movie-card-title">{movie.title}</h3>

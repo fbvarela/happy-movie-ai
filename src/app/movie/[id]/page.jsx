@@ -7,6 +7,8 @@ import ClientLayout from "@/components/ClientLayout";
 import CastList from "@/components/CastList";
 import RelatedMovies from "@/components/RelatedMovies";
 import SourceButtons from "@/components/SourceButtons";
+import WatchlistButton from "@/components/WatchlistButton";
+import MarkWatchedButton from "@/components/MarkWatchedButton";
 import { useLanguage } from "@/context/LanguageContext";
 import { posterUrl, backdropUrl } from "@/lib/tmdb";
 import { TMDB_GENRE_MAP } from "@/constants/filters";
@@ -114,6 +116,11 @@ export default function MovieDetailPage() {
                 <strong>{lang === "es" ? "Director" : "Director"}:</strong> {director.name}
               </p>
             )}
+
+            <div className="movie-detail-actions">
+              <WatchlistButton tmdbId={parseInt(id)} title={movie.title} posterPath={movie.poster_path} />
+              <MarkWatchedButton tmdbId={parseInt(id)} title={movie.title} posterPath={movie.poster_path} />
+            </div>
 
             <SourceButtons tmdbId={id} />
 
