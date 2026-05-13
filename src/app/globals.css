@@ -1169,7 +1169,54 @@ select.input { cursor: pointer; }
 }
 .spin { animation: spin 1s linear infinite; }
 
-/* ── Login page ───────────────────────────────────────── */
+/* ── Auth page (Neon Auth) ────────────────────────────── */
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 16px;
+  min-height: 60vh;
+}
+.auth-page > * {
+  max-width: 440px !important;
+  width: 100% !important;
+  align-items: stretch !important;
+}
+.auth-page [data-slot="card-header"] {
+  display: block !important;
+  text-align: center;
+  padding: 0 24px;
+}
+.auth-page [data-slot="card-title"] {
+  font-family: var(--font-serif, "Fraunces", serif);
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+}
+.auth-page [data-slot="card-description"] {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.auth-page [data-slot="card-content"] {
+  padding: 0 24px;
+}
+.auth-page [data-slot="card-footer"] {
+  padding: 0 24px;
+  justify-content: center;
+}
+.auth-page button[type="submit"] {
+  background: var(--leaf);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+}
+.auth-page button[type="submit"]:hover {
+  background: var(--leaf-light);
+}
+.auth-page a {
+  color: var(--clay);
+}
+
+/* ── Login page (legacy) ─────────────────────────────── */
 .login-card {
   max-width: 420px;
   margin: 40px auto;

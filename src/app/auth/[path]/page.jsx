@@ -9,7 +9,7 @@ export default function AuthPage() {
 
   return (
     <ClientLayout>
-      <div className="page" style={{ maxWidth: 480, margin: "0 auto" }}>
+      <div className="auth-page">
         <AuthView path={path} />
       </div>
     </ClientLayout>
