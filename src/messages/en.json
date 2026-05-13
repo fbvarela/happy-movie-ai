@@ -85,6 +85,11 @@
     "watchOn": "Watch on {source}",
     "internetArchive": "Internet Archive",
     "youtube": "YouTube",
+    "tubi": "Tubi",
+    "plex": "Plex",
+    "plutoTv": "Pluto TV",
+    "opensNewTab": "Opens in new tab",
+    "alsoTryOn": "Also try on",
     "quality": {
       "hd": "HD",
       "sd": "SD",

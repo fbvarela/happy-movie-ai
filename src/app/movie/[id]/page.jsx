@@ -122,7 +122,7 @@ export default function MovieDetailPage() {
               <MarkWatchedButton tmdbId={parseInt(id)} title={movie.title} posterPath={movie.poster_path} />
             </div>
 
-            <SourceButtons tmdbId={id} />
+            <SourceButtons tmdbId={id} movieTitle={movie.title} />
 
             {movie.overview && (
               <div style={{ marginTop: 12 }}>

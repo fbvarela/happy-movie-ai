@@ -6,9 +6,10 @@ import { useRouter } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 import QualityBadge from "@/components/QualityBadge";
 import SourceBadge from "@/components/SourceBadge";
+import { getExternalLinks } from "@/lib/external-sources";
 
-export default function SourceButtons({ tmdbId }) {
-  const { t } = useLanguage();
+export default function SourceButtons({ tmdbId, movieTitle }) {
+  const { t, lang } = useLanguage();
   const router = useRouter();
   const [sources, setSources] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -22,6 +23,8 @@ export default function SourceButtons({ tmdbId }) {
       .finally(() => setLoading(false));
   }, [tmdbId]);
 
+  const externalLinks = movieTitle ? getExternalLinks(movieTitle) : [];
+
   if (loading) {
     return (
       <div className="source-buttons">
@@ -32,18 +35,19 @@ export default function SourceButtons({ tmdbId }) {
     );
   }
 
-  if (!sources || sources.sources?.length === 0) {
+  const embeddable = sources?.sources?.filter(
+    (s) => s.source === "internet-archive" || s.source === "youtube"
+  ) || [];
+  const best = embeddable[0];
+  const hasAnySources = embeddable.length > 0 || externalLinks.length > 0;
+
+  if (!hasAnySources) {
     return (
       <div className="source-buttons">
         <p className="source-none">{t("sources.none")}</p>
       </div>
     );
   }
-
-  const embeddable = sources.sources.filter(
-    (s) => s.source === "internet-archive" || s.source === "youtube"
-  );
-  const best = embeddable[0];
 
   return (
     <div className="source-buttons">
@@ -67,27 +71,42 @@ export default function SourceButtons({ tmdbId }) {
               size="sm"
             />
             {s.source === "youtube" && (
-              <a
-                href={s.watchUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="source-external-link"
-              >
+              <a href={s.watchUrl} target="_blank" rel="noopener noreferrer" className="source-external-link">
                 <ExternalLink size={14} />
               </a>
             )}
             {s.source === "internet-archive" && (
-              <a
-                href={s.detailUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="source-external-link"
-              >
+              <a href={s.detailUrl} target="_blank" rel="noopener noreferrer" className="source-external-link">
                 <ExternalLink size={14} />
               </a>
             )}
           </div>
         ))}
+
+        {externalLinks.length > 0 && (
+          <>
+            {embeddable.length > 0 && (
+              <div className="source-divider">
+                <span>{lang === "es" ? "También disponible en" : "Also try on"}</span>
+              </div>
+            )}
+            {externalLinks.map((link) => (
+              <a
+                key={link.source}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="source-btn-item source-btn-external"
+              >
+                <SourceBadge source={link.source} />
+                <span className="source-opens-tab">
+                  {lang === "es" ? "Abre en nueva pestaña" : "Opens in new tab"}
+                </span>
+                <ExternalLink size={14} className="source-external-link" />
+              </a>
+            ))}
+          </>
+        )}
       </div>
     </div>
   );

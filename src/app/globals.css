@@ -1047,6 +1047,9 @@ select.input { cursor: pointer; }
 }
 .source-badge--ia { border-color: var(--leaf); color: var(--leaf); }
 .source-badge--yt { border-color: #ff0000; color: #ff0000; }
+.source-badge--tubi { border-color: #fa382f; color: #fa382f; }
+.source-badge--plex { border-color: #e5a00d; color: #e5a00d; }
+.source-badge--pluto { border-color: #00b4e6; color: #00b4e6; }
 .dark .source-badge { background: rgba(255,255,255,0.06); }
 
 .source-buttons { margin-top: 16px; }
@@ -1089,6 +1092,33 @@ select.input { cursor: pointer; }
   transition: color 0.15s;
 }
 .source-external-link:hover { color: var(--leaf); }
+.source-btn-external {
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.15s;
+  cursor: pointer;
+}
+.source-btn-external:hover { border-color: var(--leaf); }
+.source-opens-tab {
+  flex: 1;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+.source-divider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+.source-divider::before,
+.source-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
 
 /* ── Video player & watch page ────────────────────────── */
 .video-player {
