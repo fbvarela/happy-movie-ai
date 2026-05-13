@@ -115,7 +115,7 @@ export default function MovieDetailPage() {
               </p>
             )}
 
-            <SourceButtons tmdbId={id} />
+            <SourceButtons tmdbId={id} movieTitle={movie.title} />
 
             {movie.overview && (
               <div style={{ marginTop: 12 }}>
