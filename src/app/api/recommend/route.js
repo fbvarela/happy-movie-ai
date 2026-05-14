@@ -1,5 +1,6 @@
 import { streamText } from "ai";
 import { getTextModel } from "@/lib/ai";
+import { aiLimiter } from "@/lib/rate-limit";
 
 const SYSTEM_PROMPT = `You are a movie recommendation assistant for HappyMovie, a free movie streaming app.
 
@@ -26,6 +27,14 @@ Return 5-8 recommendations per request. Vary your suggestions — don't always r
 
 export async function POST(request) {
   try {
+    const limit = aiLimiter(request);
+    if (!limit.ok) {
+      return new Response(JSON.stringify({ error: "Too many requests" }), {
+        status: 429,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
     const { messages } = await request.json();
 
     if (!messages?.length) {

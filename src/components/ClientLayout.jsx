@@ -2,6 +2,8 @@
 
 import SidebarNav from "@/components/SidebarNav";
 import BottomNav from "@/components/BottomNav";
+import Footer from "@/components/Footer";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import { useLanguage } from "@/context/LanguageContext";
 import { useAuth } from "@/context/AuthContext";
 import {
@@ -36,7 +38,10 @@ export default function ClientLayout({ children }) {
       <SidebarNav navItems={NAV_ITEMS} logo={LOGO} />
       <BottomNav navItems={NAV_ITEMS} logo={LOGO} />
       <main className="app">
-        {children}
+        <ErrorBoundary>
+          {children}
+        </ErrorBoundary>
+        <Footer />
       </main>
     </>
   );
