@@ -53,8 +53,17 @@
     "error": "Something went wrong. Please try again."
   },
   "collections": {
-    "title": "My Collections",
-    "subtitle": "Organize your movies into custom collections"
+    "title": "Collections",
+    "subtitle": "Browse curated lists and organize movies into your own collections",
+    "featured": "Featured Collections",
+    "mine": "My Collections",
+    "empty": "No collections yet",
+    "create": "Create Collection",
+    "movieCount": "{count} movies",
+    "addTo": "Add to Collection",
+    "newCollection": "New Collection",
+    "namePlaceholder": "Collection name",
+    "descPlaceholder": "Description (optional)"
   },
   "reviews": {
     "title": "My Reviews",
