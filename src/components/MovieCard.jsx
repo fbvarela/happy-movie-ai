@@ -15,7 +15,7 @@ export default function MovieCard({ movie }) {
     .filter(Boolean);
 
   return (
-    <Link href={`/movie/${movie.id}`} className="movie-card">
+    <Link href={`/movie/${movie.id}`} className="movie-card" aria-label={`${movie.title}${year ? ` (${year})` : ""}`}>
       <div className="movie-card-poster">
         {movie.poster_path ? (
           <img

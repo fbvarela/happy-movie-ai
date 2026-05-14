@@ -36,6 +36,17 @@ function normalizeListItem(item) {
   };
 }
 
+function parseReleaseDate(released, year) {
+  if (released && released !== "N/A") {
+    const d = new Date(released);
+    if (!isNaN(d.getTime())) {
+      return d.toISOString().slice(0, 10); // "2010-07-16"
+    }
+  }
+  if (year) return `${year}-01-01`;
+  return null;
+}
+
 function normalizeDetail(item) {
   const genres = (item.Genre || "")
     .split(",")
@@ -67,7 +78,7 @@ function normalizeDetail(item) {
     title: item.Title,
     poster_path: item.Poster !== "N/A" ? item.Poster : null,
     backdrop_path: null,
-    release_date: item.Released && item.Released !== "N/A" ? item.Released : (item.Year ? `${item.Year}-01-01` : null),
+    release_date: parseReleaseDate(item.Released, item.Year),
     vote_average: voteAvg,
     runtime: runtimeMin,
     overview: item.Plot !== "N/A" ? item.Plot : "",
