@@ -2,13 +2,15 @@
 
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { ArrowLeft, Clapperboard, Star } from "lucide-react";
+import { ArrowLeft, Clapperboard, Star, FolderPlus } from "lucide-react";
 import ClientLayout from "@/components/ClientLayout";
 import CastList from "@/components/CastList";
 import RelatedMovies from "@/components/RelatedMovies";
 import SourceButtons from "@/components/SourceButtons";
 import WatchlistButton from "@/components/WatchlistButton";
 import MarkWatchedButton from "@/components/MarkWatchedButton";
+import AddToCollectionModal from "@/components/AddToCollectionModal";
+import { useAuth } from "@/context/AuthContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { posterUrl, backdropUrl } from "@/lib/omdb";
 import { TMDB_GENRE_MAP } from "@/constants/filters";
@@ -17,8 +19,10 @@ export default function MovieDetailPage() {
   const { id } = useParams();
   const router = useRouter();
   const { t, lang } = useLanguage();
+  const { user } = useAuth();
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showCollectionModal, setShowCollectionModal] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -120,6 +124,14 @@ export default function MovieDetailPage() {
             <div className="movie-detail-actions">
               <WatchlistButton tmdbId={parseInt(id)} title={movie.title} posterPath={movie.poster_path} />
               <MarkWatchedButton tmdbId={parseInt(id)} title={movie.title} posterPath={movie.poster_path} />
+              {user && (
+                <button
+                  className="btn btn-ghost btn-sm"
+                  onClick={() => setShowCollectionModal(true)}
+                >
+                  <FolderPlus size={16} /> {lang === "es" ? "Colección" : "Collection"}
+                </button>
+              )}
             </div>
 
             <SourceButtons tmdbId={id} movieTitle={movie.title} />
@@ -149,11 +161,17 @@ export default function MovieDetailPage() {
           </div>
         )}
 
-        {/* TMDB attribution */}
+        {/* OMDb attribution */}
         <div className="tmdb-attribution mt16">
-          <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg" alt="TMDB" height="14" />
-          <span>This product uses the TMDB API but is not endorsed or certified by TMDB.</span>
+          <span>{lang === "es" ? "Datos de películas proporcionados por" : "Movie data provided by"} <a href="https://www.omdbapi.com/" target="_blank" rel="noopener noreferrer">OMDb API</a></span>
         </div>
+
+        {showCollectionModal && (
+          <AddToCollectionModal
+            movie={movie}
+            onClose={() => setShowCollectionModal(false)}
+          />
+        )}
       </div>
     </ClientLayout>
   );

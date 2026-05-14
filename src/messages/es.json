@@ -43,12 +43,27 @@
   },
   "recommend": {
     "title": "Recomendaciones IA",
-    "subtitle": "Sugerencias personalizadas con inteligencia artificial",
-    "askPlaceholder": "Describe qué tipo de película te apetece ver..."
+    "subtitle": "Describe lo que te apetece ver y obtén sugerencias de películas gratuitas con IA",
+    "askPlaceholder": "Describe qué tipo de película te apetece ver...",
+    "moodLabel": "¿Qué te apetece ver?",
+    "newChat": "Nueva charla",
+    "thinking": "Pensando...",
+    "viewDetails": "Ver detalles",
+    "findOnImdb": "Buscar en IMDb",
+    "error": "Algo salió mal. Inténtalo de nuevo."
   },
   "collections": {
-    "title": "Mis colecciones",
-    "subtitle": "Organiza tus películas en colecciones personalizadas"
+    "title": "Colecciones",
+    "subtitle": "Explora listas seleccionadas y organiza películas en tus propias colecciones",
+    "featured": "Colecciones destacadas",
+    "mine": "Mis colecciones",
+    "empty": "No hay colecciones aún",
+    "create": "Crear colección",
+    "movieCount": "{count} películas",
+    "addTo": "Añadir a colección",
+    "newCollection": "Nueva colección",
+    "namePlaceholder": "Nombre de la colección",
+    "descPlaceholder": "Descripción (opcional)"
   },
   "reviews": {
     "title": "Mis reseñas",
