@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { Flame, Sword, Laugh, Ghost, Rocket, Drama, Film } from "lucide-react";
+import { Flame, Sword, Laugh, Ghost, Rocket, Drama, Film, Tv } from "lucide-react";
 import ClientLayout from "@/components/ClientLayout";
 import MovieGrid from "@/components/MovieGrid";
 import SearchBar from "@/components/SearchBar";
@@ -55,6 +55,22 @@ export default function HomePage() {
               <span>{lang === "es" ? g.labelEs : g.label}</span>
             </button>
           ))}
+        </div>
+
+        {/* RTVE Spanish Cinema featured section */}
+        <div className="rtve-home-banner mt16" onClick={() => router.push("/rtve")}>
+          <div className="rtve-home-banner-content">
+            <Tv size={24} />
+            <div>
+              <strong>{lang === "es" ? "Cine Español Gratis" : "Free Spanish Cinema"}</strong>
+              <span>
+                {lang === "es"
+                  ? "Descubre películas españolas en RTVE Play"
+                  : "Discover Spanish movies on RTVE Play"}
+              </span>
+            </div>
+          </div>
+          <span className="rtve-home-badge">RTVE</span>
         </div>
 
         {/* Trending */}

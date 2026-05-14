@@ -8,7 +8,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { useAuth } from "@/context/AuthContext";
 import {
   Clapperboard, Home, Compass, Heart, Bot,
-  Library, Star, BarChart3, Settings, LogIn,
+  Library, Star, BarChart3, Settings, LogIn, Tv,
 } from "lucide-react";
 
 const LOGO = { icon: <Clapperboard size={24} />, name: "HappyMovie", sub: "AI Movie Companion" };
@@ -23,6 +23,7 @@ export default function ClientLayout({ children }) {
     { href: "/watchlist", icon: <Heart size={20} />, label: t("nav.watchlist"), shortLabel: t("nav.watchlist"), bottom: true },
     { href: "/recommend", icon: <Bot size={20} />, label: t("nav.recommend"), shortLabel: t("nav.ai"), bottom: true },
     { section: t("nav.library") },
+    { href: "/rtve", icon: <Tv size={20} />, label: t("nav.rtve") },
     { href: "/collections", icon: <Library size={20} />, label: t("nav.collections") },
     { href: "/reviews", icon: <Star size={20} />, label: t("nav.reviews") },
     { href: "/stats", icon: <BarChart3 size={20} />, label: t("nav.stats") },

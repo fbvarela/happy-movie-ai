@@ -20,6 +20,8 @@ export default function Footer() {
           <a href="https://archive.org" target="_blank" rel="noopener noreferrer">Internet Archive</a>
           {" · "}
           <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">YouTube</a>
+          {" · "}
+          <a href="https://www.rtve.es/play/" target="_blank" rel="noopener noreferrer">RTVE Play</a>
         </p>
       </div>
     </footer>
