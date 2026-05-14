@@ -43,8 +43,14 @@
   },
   "recommend": {
     "title": "Recomendaciones IA",
-    "subtitle": "Sugerencias personalizadas con inteligencia artificial",
-    "askPlaceholder": "Describe qué tipo de película te apetece ver..."
+    "subtitle": "Describe lo que te apetece ver y obtén sugerencias de películas gratuitas con IA",
+    "askPlaceholder": "Describe qué tipo de película te apetece ver...",
+    "moodLabel": "¿Qué te apetece ver?",
+    "newChat": "Nueva charla",
+    "thinking": "Pensando...",
+    "viewDetails": "Ver detalles",
+    "findOnImdb": "Buscar en IMDb",
+    "error": "Algo salió mal. Inténtalo de nuevo."
   },
   "collections": {
     "title": "Mis colecciones",

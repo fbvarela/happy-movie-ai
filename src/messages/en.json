@@ -43,8 +43,14 @@
   },
   "recommend": {
     "title": "AI Recommendations",
-    "subtitle": "Get personalized suggestions powered by AI",
-    "askPlaceholder": "Describe what kind of movie you're in the mood for..."
+    "subtitle": "Describe what you're in the mood for and get AI-powered movie suggestions you can watch for free",
+    "askPlaceholder": "Describe what kind of movie you're in the mood for...",
+    "moodLabel": "What are you in the mood for?",
+    "newChat": "New chat",
+    "thinking": "Thinking...",
+    "viewDetails": "View Details",
+    "findOnImdb": "Find on IMDb",
+    "error": "Something went wrong. Please try again."
   },
   "collections": {
     "title": "My Collections",
