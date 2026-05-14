@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Clapperboard, Star } from "lucide-react";
-import { posterUrl } from "@/lib/tmdb";
+import { posterUrl } from "@/lib/omdb";
 import { TMDB_GENRE_MAP } from "@/constants/filters";
 import WatchlistButton from "@/components/WatchlistButton";
 

@@ -10,7 +10,7 @@ import SourceButtons from "@/components/SourceButtons";
 import WatchlistButton from "@/components/WatchlistButton";
 import MarkWatchedButton from "@/components/MarkWatchedButton";
 import { useLanguage } from "@/context/LanguageContext";
-import { posterUrl, backdropUrl } from "@/lib/tmdb";
+import { posterUrl, backdropUrl } from "@/lib/omdb";
 import { TMDB_GENRE_MAP } from "@/constants/filters";
 
 export default function MovieDetailPage() {

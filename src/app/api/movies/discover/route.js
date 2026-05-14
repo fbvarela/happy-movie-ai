@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { discoverMovies } from "@/lib/tmdb";
+import { discoverMovies } from "@/lib/omdb";
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);

@@ -1,6 +1,6 @@
 "use client";
 
-import { posterUrl } from "@/lib/tmdb";
+import { posterUrl } from "@/lib/omdb";
 
 export default function CastList({ cast }) {
   if (!cast?.length) return null;

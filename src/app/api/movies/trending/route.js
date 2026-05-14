@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getTrending } from "@/lib/tmdb";
+import { getTrending } from "@/lib/omdb";
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
