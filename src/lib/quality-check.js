@@ -85,6 +85,9 @@ export function rankSources(sources, tmdbRuntime) {
     }))
     .filter((s) => s.qualityInfo.quality !== "unwatchable")
     .sort((a, b) => {
+      // RTVE is highest priority (official broadcaster, legal, HD)
+      if (a.source === "rtve" && b.source !== "rtve") return -1;
+      if (b.source === "rtve" && a.source !== "rtve") return 1;
       if (a.source === "internet-archive" && b.source !== "internet-archive") return -1;
       if (b.source === "internet-archive" && a.source !== "internet-archive") return 1;
       if (a.qualityInfo.total !== b.qualityInfo.total) return b.qualityInfo.total - a.qualityInfo.total;

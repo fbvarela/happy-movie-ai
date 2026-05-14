@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getMovie } from "@/lib/omdb";
 import { searchIA } from "@/lib/internet-archive";
 import { searchYouTube } from "@/lib/youtube";
+import { findRtveByImdb } from "@/lib/rtve";
 import { rankSources } from "@/lib/quality-check";
 
 const cache = new Map();
@@ -24,12 +25,34 @@ export async function GET(request, { params }) {
   const year = movie.release_date ? parseInt(movie.release_date.slice(0, 4)) : null;
   const runtime = movie.runtime || null;
 
-  const [iaResults, ytResults] = await Promise.all([
+  const [iaResults, ytResults, rtveResult] = await Promise.all([
     searchIA(title, year).catch(() => []),
     searchYouTube(title, year).catch(() => []),
+    findRtveByImdb(tmdbId).catch(() => null),
   ]);
 
-  const allSources = [...iaResults, ...ytResults];
+  // Build RTVE source entry if found
+  const rtveSources = [];
+  if (rtveResult) {
+    const bestQuality = rtveResult.qualities?.[0];
+    rtveSources.push({
+      source: "rtve",
+      title: rtveResult.title,
+      watchUrl: rtveResult.watchUrl,
+      detailUrl: rtveResult.watchUrl,
+      geoRestricted: rtveResult.geoRestricted,
+      duration: rtveResult.durationMs ? rtveResult.durationMs / 1000 : null,
+      resolution: bestQuality
+        ? { width: bestQuality.width, height: bestQuality.height }
+        : null,
+      qualityInfo: {
+        quality: bestQuality?.height >= 720 ? "hd" : "sd",
+        notes: rtveResult.geoRestricted ? "Spain only" : null,
+      },
+    });
+  }
+
+  const allSources = [...rtveSources, ...iaResults, ...ytResults];
   const ranked = rankSources(allSources, runtime);
 
   const isPreSound = year && year < 1929;

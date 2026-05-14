@@ -8,6 +8,7 @@
     "library": "Biblioteca",
     "collections": "Colecciones",
     "reviews": "Reseñas",
+    "rtve": "Cine Español",
     "stats": "Estadísticas",
     "settings": "Ajustes"
   },
@@ -103,6 +104,8 @@
     "tubi": "Tubi",
     "plex": "Plex",
     "plutoTv": "Pluto TV",
+    "rtve": "RTVE Play",
+    "watchOnRtve": "Ver gratis en RTVE",
     "opensNewTab": "Abre en nueva pestaña",
     "alsoTryOn": "También disponible en",
     "quality": {
@@ -110,5 +113,16 @@
       "sd": "SD",
       "low": "Baja calidad"
     }
+  },
+  "rtve": {
+    "title": "Cine Español",
+    "subtitle": "Películas españolas gratis en RTVE Play — la televisión pública de España",
+    "badge": "Contenido legal y gratuito de RTVE.es",
+    "searchPlaceholder": "Buscar películas españolas, directores...",
+    "programs": "Programas",
+    "geoNote": "Disponible en España",
+    "watchFree": "Ver gratis en RTVE",
+    "noMovies": "No se encontraron películas",
+    "sectionTitle": "Cine Español en RTVE"
   }
 }

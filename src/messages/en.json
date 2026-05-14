@@ -8,6 +8,7 @@
     "library": "Library",
     "collections": "Collections",
     "reviews": "Reviews",
+    "rtve": "Spanish Cinema",
     "stats": "Stats",
     "settings": "Settings"
   },
@@ -103,6 +104,8 @@
     "tubi": "Tubi",
     "plex": "Plex",
     "plutoTv": "Pluto TV",
+    "rtve": "RTVE Play",
+    "watchOnRtve": "Watch free on RTVE",
     "opensNewTab": "Opens in new tab",
     "alsoTryOn": "Also try on",
     "quality": {
@@ -110,5 +113,16 @@
       "sd": "SD",
       "low": "Low Quality"
     }
+  },
+  "rtve": {
+    "title": "Spanish Cinema",
+    "subtitle": "Free Spanish movies on RTVE Play — Spain's public broadcaster",
+    "badge": "Legal & free content from RTVE.es",
+    "searchPlaceholder": "Search Spanish movies, directors...",
+    "programs": "Programs",
+    "geoNote": "Available in Spain",
+    "watchFree": "Watch free on RTVE",
+    "noMovies": "No movies found",
+    "sectionTitle": "Spanish Cinema on RTVE"
   }
 }

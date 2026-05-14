@@ -103,8 +103,8 @@ export default function SettingsPage() {
         <div className="settings-legal mt16">
           <p style={{ fontSize: "0.8rem", color: "var(--text-muted)", lineHeight: 1.6 }}>
             {lang === "es"
-              ? "HappyMovie es una aplicacion de descubrimiento de peliculas. No alojamos ningun contenido de video. Todos los videos se reproducen desde fuentes legales de terceros (Internet Archive, YouTube). Los datos de peliculas son proporcionados por OMDb API."
-              : "HappyMovie is a movie discovery application. We do not host any video content. All videos are streamed from legal third-party sources (Internet Archive, YouTube). Movie data provided by OMDb API."}
+              ? "HappyMovie es una aplicacion de descubrimiento de peliculas. No alojamos ningun contenido de video. Todos los videos se reproducen desde fuentes legales de terceros (Internet Archive, YouTube, RTVE Play). Los datos de peliculas son proporcionados por OMDb API. El contenido de RTVE Play es propiedad de Radio Television Española."
+              : "HappyMovie is a movie discovery application. We do not host any video content. All videos are streamed from legal third-party sources (Internet Archive, YouTube, RTVE Play). Movie data provided by OMDb API. RTVE Play content is property of Radio Television Española."}
           </p>
         </div>
       </div>

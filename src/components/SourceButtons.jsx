@@ -38,8 +38,9 @@ export default function SourceButtons({ tmdbId, movieTitle }) {
   const embeddable = sources?.sources?.filter(
     (s) => s.source === "internet-archive" || s.source === "youtube"
   ) || [];
+  const rtveSources = sources?.sources?.filter((s) => s.source === "rtve") || [];
   const best = embeddable[0];
-  const hasAnySources = embeddable.length > 0 || externalLinks.length > 0;
+  const hasAnySources = embeddable.length > 0 || rtveSources.length > 0 || externalLinks.length > 0;
 
   if (!hasAnySources) {
     return (
@@ -83,9 +84,38 @@ export default function SourceButtons({ tmdbId, movieTitle }) {
           </div>
         ))}
 
-        {externalLinks.length > 0 && (
+        {rtveSources.length > 0 && (
           <>
             {embeddable.length > 0 && (
+              <div className="source-divider">
+                <span>{lang === "es" ? "También en" : "Also on"}</span>
+              </div>
+            )}
+            {rtveSources.map((s, i) => (
+              <a
+                key={`rtve-${i}`}
+                href={s.watchUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="source-btn-item source-btn-external source-btn-rtve"
+              >
+                <SourceBadge source="rtve" />
+                <span className="source-rtve-label">
+                  {lang === "es" ? "Ver gratis en RTVE" : "Watch free on RTVE"}
+                </span>
+                {s.geoRestricted && (
+                  <span className="source-geo-tag">🇪🇸</span>
+                )}
+                <QualityBadge quality={s.qualityInfo?.quality} size="sm" />
+                <ExternalLink size={14} className="source-external-link" />
+              </a>
+            ))}
+          </>
+        )}
+
+        {externalLinks.length > 0 && (
+          <>
+            {(embeddable.length > 0 || rtveSources.length > 0) && (
               <div className="source-divider">
                 <span>{lang === "es" ? "También disponible en" : "Also try on"}</span>
               </div>

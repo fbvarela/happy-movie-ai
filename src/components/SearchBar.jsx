@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { Search, X } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
-export default function SearchBar({ onSearch, initialValue = "" }) {
+export default function SearchBar({ onSearch, initialValue = "", placeholder }) {
   const [value, setValue] = useState(initialValue);
   const { t } = useLanguage();
   const timerRef = useRef(null);
@@ -23,7 +23,7 @@ export default function SearchBar({ onSearch, initialValue = "" }) {
       <input
         type="text"
         className="input search-bar-input"
-        placeholder={t("discover.searchPlaceholder")}
+        placeholder={placeholder || t("discover.searchPlaceholder")}
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
