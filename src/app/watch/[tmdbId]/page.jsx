@@ -8,7 +8,7 @@ import VideoPlayer from "@/components/VideoPlayer";
 import QualityBadge from "@/components/QualityBadge";
 import SourceBadge from "@/components/SourceBadge";
 import { useLanguage } from "@/context/LanguageContext";
-import { posterUrl } from "@/lib/tmdb";
+import { posterUrl } from "@/lib/omdb";
 
 export default function WatchPage() {
   const { tmdbId } = useParams();

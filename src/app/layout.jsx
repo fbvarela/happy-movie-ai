@@ -1,3 +1,4 @@
+import "@neondatabase/auth/ui/css";
 import "./globals.css";
 import Providers from "@/components/Providers";
 import Script from "next/script";

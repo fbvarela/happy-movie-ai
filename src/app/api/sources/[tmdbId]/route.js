@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getMovie } from "@/lib/tmdb";
+import { getMovie } from "@/lib/omdb";
 import { searchIA } from "@/lib/internet-archive";
 import { searchYouTube } from "@/lib/youtube";
 import { rankSources } from "@/lib/quality-check";

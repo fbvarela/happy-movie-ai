@@ -66,6 +66,18 @@
     "title": "Settings",
     "subtitle": "Manage your account and preferences"
   },
+  "auth": {
+    "title": "Sign In",
+    "subtitle": "Sign in with your email to save movies and track your watch history",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "emailPlaceholder": "your@email.com",
+    "sendMagicLink": "Send Magic Link",
+    "sending": "Sending...",
+    "checkEmail": "Check your email!",
+    "magicLinkSent": "We sent a magic link to {email}. Click it to sign in.",
+    "loginRequired": "Sign in to access your watchlist"
+  },
   "sources": {
     "checking": "Checking free sources...",
     "none": "No free sources found for this movie",
