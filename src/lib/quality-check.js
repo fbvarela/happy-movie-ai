@@ -90,8 +90,10 @@ export function rankSources(sources, tmdbRuntime) {
       if (b.source === "rtve" && a.source !== "rtve") return 1;
       if (a.source === "internet-archive" && b.source !== "internet-archive") return -1;
       if (b.source === "internet-archive" && a.source !== "internet-archive") return 1;
+      if (a.source === "vimeo" && b.source !== "vimeo") return -1;
+      if (b.source === "vimeo" && a.source !== "vimeo") return 1;
       if (a.qualityInfo.total !== b.qualityInfo.total) return b.qualityInfo.total - a.qualityInfo.total;
-      if (a.source === "youtube" && b.source === "youtube") {
+      if ((a.source === "youtube" && b.source === "youtube") || (a.source === "vimeo" && b.source === "vimeo")) {
         if (a.isOfficialChannel && !b.isOfficialChannel) return -1;
         if (!a.isOfficialChannel && b.isOfficialChannel) return 1;
       }
