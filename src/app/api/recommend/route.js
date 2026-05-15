@@ -50,9 +50,15 @@ export async function POST(request) {
       model,
       system: SYSTEM_PROMPT,
       messages,
+      onError: (err) => console.error("Recommend stream error:", err),
     });
 
-    return result.toDataStreamResponse();
+    return result.toDataStreamResponse({
+      getErrorMessage: (err) => {
+        console.error("Recommend stream error (data stream):", err);
+        return err instanceof Error ? err.message : "Failed to generate recommendations";
+      },
+    });
   } catch (err) {
     console.error("Recommend API error:", err);
     return new Response(
