@@ -29,8 +29,9 @@ export default function RecommendPage() {
   const inputRef = useRef(null);
   const [inputValue, setInputValue] = useState("");
 
-  const { messages, isLoading, append, setMessages } = useChat({
+  const { messages, isLoading, error, append, setMessages } = useChat({
     api: "/api/recommend",
+    onError: (err) => console.error("Chat error:", err),
   });
 
   // Auto-scroll to bottom on new messages
@@ -127,6 +128,17 @@ export default function RecommendPage() {
                   </div>
                 );
               })}
+
+              {error && (
+                <div className="recommend-msg recommend-msg-ai">
+                  <div className="recommend-msg-avatar recommend-msg-avatar-ai">
+                    <Bot size={16} />
+                  </div>
+                  <div className="recommend-msg-content" style={{ color: "var(--error, #e53e3e)" }}>
+                    {error.message || "An error occurred. Check the server logs for details."}
+                  </div>
+                </div>
+              )}
 
               {isLoading && (
                 <div className="recommend-msg recommend-msg-ai">
