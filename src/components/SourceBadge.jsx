@@ -1,10 +1,11 @@
 "use client";
 
-import { Archive, PlayCircle, Tv, MonitorPlay, Satellite, Radio } from "lucide-react";
+import { Archive, PlayCircle, Tv, MonitorPlay, Satellite, Radio, Film } from "lucide-react";
 
 const SOURCE_CONFIG = {
   "internet-archive": { icon: Archive, label: "Internet Archive", className: "source-badge source-badge--ia" },
   "youtube": { icon: PlayCircle, label: "YouTube", className: "source-badge source-badge--yt" },
+  "vimeo": { icon: Film, label: "Vimeo", className: "source-badge source-badge--vimeo" },
   "rtve": { icon: Radio, label: "RTVE Play", className: "source-badge source-badge--rtve" },
   "tubi": { icon: Tv, label: "Tubi", className: "source-badge source-badge--tubi" },
   "plex": { icon: MonitorPlay, label: "Plex", className: "source-badge source-badge--plex" },

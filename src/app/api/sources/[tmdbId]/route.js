@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getMovie } from "@/lib/omdb";
 import { searchIA } from "@/lib/internet-archive";
 import { searchYouTube } from "@/lib/youtube";
+import { searchVimeo } from "@/lib/vimeo";
 import { findRtveByImdb } from "@/lib/rtve";
 import { rankSources } from "@/lib/quality-check";
 
@@ -25,9 +26,10 @@ export async function GET(request, { params }) {
   const year = movie.release_date ? parseInt(movie.release_date.slice(0, 4)) : null;
   const runtime = movie.runtime || null;
 
-  const [iaResults, ytResults, rtveResult] = await Promise.all([
+  const [iaResults, ytResults, vimeoResults, rtveResult] = await Promise.all([
     searchIA(title, year).catch(() => []),
     searchYouTube(title, year).catch(() => []),
+    searchVimeo(title, year).catch(() => []),
     findRtveByImdb(tmdbId).catch(() => null),
   ]);
 
@@ -52,7 +54,7 @@ export async function GET(request, { params }) {
     });
   }
 
-  const allSources = [...rtveSources, ...iaResults, ...ytResults];
+  const allSources = [...rtveSources, ...iaResults, ...vimeoResults, ...ytResults];
   const ranked = rankSources(allSources, runtime);
 
   const isPreSound = year && year < 1929;

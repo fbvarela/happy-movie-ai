@@ -1111,6 +1111,7 @@ select.input { cursor: pointer; }
 }
 .source-badge--ia { border-color: var(--leaf); color: var(--leaf); }
 .source-badge--yt { border-color: #ff0000; color: #ff0000; }
+.source-badge--vimeo { border-color: #1ab7ea; color: #1ab7ea; }
 .source-badge--tubi { border-color: #fa382f; color: #fa382f; }
 .source-badge--plex { border-color: #e5a00d; color: #e5a00d; }
 .source-badge--pluto { border-color: #00b4e6; color: #00b4e6; }
