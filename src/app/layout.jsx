@@ -2,6 +2,7 @@ import "@neondatabase/auth/ui/css";
 import "./globals.css";
 import Providers from "@/components/Providers";
 import Script from "next/script";
+import FloatingChatButton from "@/components/FloatingChatButton";
 
 export const metadata = {
   title: "HappyMovie - AI Movie Companion",
@@ -45,6 +46,7 @@ export default function RootLayout({ children }) {
         <Providers>
           {children}
         </Providers>
+        <FloatingChatButton />
       </body>
     </html>
   );
