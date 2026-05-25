@@ -26,7 +26,7 @@ export default function HomePage() {
   useEffect(() => {
     fetch("/api/movies/trending")
       .then((r) => r.json())
-      .then((data) => setTrending((data.results || []).slice(0, 12)))
+      .then((data) => setTrending((data.results || []).slice(0, 14)))
       .catch(() => setTrending([]))
       .finally(() => setLoading(false));
   }, []);
