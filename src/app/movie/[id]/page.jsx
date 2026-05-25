@@ -83,7 +83,7 @@ export default function MovieDetailPage() {
         </div>
       )}
 
-      <div className="page">
+      <div className={`page${movie.backdrop_path ? " has-backdrop" : ""}`}>
         <button className="btn btn-ghost btn-sm mb8" onClick={() => router.back()}>
           <ArrowLeft size={16} style={{ display: "inline", verticalAlign: "middle" }} /> {t("common.back")}
         </button>

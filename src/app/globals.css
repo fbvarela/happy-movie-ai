@@ -952,9 +952,11 @@ select.input { cursor: pointer; }
 .movie-detail-header {
   display: flex;
   gap: 24px;
-  margin-top: -80px;
   position: relative;
   z-index: 1;
+}
+.page.has-backdrop .movie-detail-header {
+  margin-top: -80px;
 }
 .movie-detail-poster {
   flex-shrink: 0;
