@@ -93,16 +93,29 @@ function normalizeDetail(item) {
 
 // ── Public API (matches old tmdb.js exports) ──────────────
 
-export async function searchMovies(query, page = 1) {
+const OMDB_PAGE = 10;
+
+export async function searchMovies(query, page = 1, perPage = OMDB_PAGE) {
+  const appPage = parseInt(page);
+  const chunks = Math.max(1, Math.ceil(perPage / OMDB_PAGE));
+  const firstOmdbPage = (appPage - 1) * chunks + 1;
+
   try {
-    const data = await get({ s: query, page, type: "movie" });
-    const results = (data.Search || []).map(normalizeListItem);
-    const total = parseInt(data.totalResults) || 0;
+    const responses = await Promise.all(
+      Array.from({ length: chunks }, (_, i) =>
+        get({ s: query, page: firstOmdbPage + i, type: "movie" }).catch(() => ({}))
+      )
+    );
+    const results = responses
+      .flatMap((r) => r.Search || [])
+      .slice(0, perPage)
+      .map(normalizeListItem);
+    const total = parseInt(responses[0]?.totalResults) || 0;
     return {
       results,
-      page: parseInt(page),
+      page: appPage,
       total_results: total,
-      total_pages: Math.ceil(total / 10),
+      total_pages: Math.ceil(total / (OMDB_PAGE * chunks)),
     };
   } catch {
     return { results: [], page: 1, total_results: 0, total_pages: 0 };
@@ -123,9 +136,9 @@ const POPULAR_IDS = [
   "tt0172495", "tt2582802", "tt0407887", "tt7286456", "tt0086190",
 ];
 
-export async function getTrending(_timeWindow = "week", page = 1) {
-  const start = (parseInt(page) - 1) * 10;
-  const ids = POPULAR_IDS.slice(start, start + 10);
+export async function getTrending(_timeWindow = "week", page = 1, perPage = OMDB_PAGE) {
+  const start = (parseInt(page) - 1) * perPage;
+  const ids = POPULAR_IDS.slice(start, start + perPage);
 
   const results = await Promise.all(
     ids.map(async (id) => {
@@ -142,12 +155,12 @@ export async function getTrending(_timeWindow = "week", page = 1) {
     results: results.filter(Boolean),
     page: parseInt(page),
     total_results: POPULAR_IDS.length,
-    total_pages: Math.ceil(POPULAR_IDS.length / 10),
+    total_pages: Math.ceil(POPULAR_IDS.length / perPage),
   };
 }
 
 // OMDb doesn't support genre-based discovery — fall back to search
-export async function discoverMovies({ page = 1, genreIds } = {}) {
+export async function discoverMovies({ page = 1, genreIds, perPage } = {}) {
   // Use a generic search term based on genre to approximate discovery
   const GENRE_SEARCH_TERMS = {
     28: "action", 35: "comedy", 27: "horror", 878: "space",
@@ -160,7 +173,7 @@ export async function discoverMovies({ page = 1, genreIds } = {}) {
   const firstGenre = genreIds ? genreIds.split(",")[0] : null;
   const term = (firstGenre && GENRE_SEARCH_TERMS[firstGenre]) || "movie";
 
-  return searchMovies(term, page);
+  return searchMovies(term, page, perPage);
 }
 
 export function posterUrl(path, _size = "w342") {

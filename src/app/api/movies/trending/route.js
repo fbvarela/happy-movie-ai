@@ -5,6 +5,6 @@ export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const page = searchParams.get("page") || 1;
 
-  const data = await getTrending("week", page);
+  const data = await getTrending("week", page, 14);
   return NextResponse.json(data);
 }

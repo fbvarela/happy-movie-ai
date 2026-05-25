@@ -12,6 +12,7 @@ export async function GET(request) {
     voteGte: searchParams.get("voteGte") || undefined,
     language: searchParams.get("language") || undefined,
     sortBy: searchParams.get("sortBy") || "popularity.desc",
+    perPage: 14,
   });
 
   return NextResponse.json(data);
