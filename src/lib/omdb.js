@@ -136,6 +136,55 @@ const POPULAR_IDS = [
   "tt0172495", "tt2582802", "tt0407887", "tt7286456", "tt0086190",
 ];
 
+// OMDb has no real genre filter — keyed by TMDB genre id.
+// IMDb IDs hand-curated; expand as needed.
+const CURATED_GENRE_IDS = {
+  // Action
+  28: [
+    "tt0095016", "tt1392190", "tt2911666", "tt0133093", "tt0172495",
+    "tt0103064", "tt0258463", "tt0093409", "tt0111257", "tt0113277",
+    "tt0093773", "tt0090605", "tt1899353", "tt0381061", "tt1074638",
+    "tt0092099", "tt1745960", "tt0117060", "tt0468569", "tt4154796",
+    "tt0993846", "tt0167260", "tt0080684", "tt0086190",
+  ],
+  // Comedy
+  35: [
+    "tt0829482", "tt0357413", "tt0838283", "tt1119646", "tt1478338",
+    "tt0443453", "tt0942385", "tt0109686", "tt0107048", "tt0118715",
+    "tt0080339", "tt0080487", "tt0088258", "tt0151804", "tt0196229",
+    "tt0396269", "tt0478311", "tt1232829", "tt0302886", "tt0332379",
+    "tt0114369", "tt0361748",
+  ],
+  // Horror
+  27: [
+    "tt0081505", "tt0077651", "tt0070047", "tt5052448", "tt7784604",
+    "tt0087800", "tt0072271", "tt0054215", "tt2321549", "tt0063522",
+    "tt0084787", "tt0078748", "tt3235888", "tt4263482", "tt8772262",
+    "tt0117571", "tt0387564", "tt1179904", "tt1457767", "tt1922777",
+  ],
+  // Sci-Fi
+  878: [
+    "tt0083658", "tt1856101", "tt0816692", "tt1375666", "tt0062622",
+    "tt0076759", "tt0133093", "tt2543164", "tt0470752", "tt1160419",
+    "tt1136608", "tt0206634", "tt1182345", "tt0338013", "tt1276104",
+    "tt1454468", "tt3659388", "tt1631867", "tt1706620", "tt2798920",
+  ],
+  // Drama
+  18: [
+    "tt0111161", "tt0068646", "tt0109830", "tt0108052", "tt0050083",
+    "tt0099685", "tt0137523", "tt0110912", "tt0407887", "tt0469494",
+    "tt0477348", "tt2582802", "tt6751668", "tt1285016", "tt4975722",
+    "tt1895587", "tt0268978", "tt0169547", "tt0454921", "tt4034228",
+  ],
+  // Documentary
+  99: [
+    "tt7775622", "tt7681902", "tt5895028", "tt4044364", "tt2125608",
+    "tt2375605", "tt1155592", "tt0310793", "tt0361596", "tt0390521",
+    "tt0497116", "tt0428803", "tt0427312", "tt1772925", "tt1424432",
+    "tt2870648", "tt8420184", "tt8760684", "tt5117320",
+  ],
+};
+
 export async function getTrending(_timeWindow = "week", page = 1, perPage = OMDB_PAGE) {
   const start = (parseInt(page) - 1) * perPage;
   const ids = POPULAR_IDS.slice(start, start + perPage);
@@ -159,9 +208,40 @@ export async function getTrending(_timeWindow = "week", page = 1, perPage = OMDB
   };
 }
 
-// OMDb doesn't support genre-based discovery — fall back to search
-export async function discoverMovies({ page = 1, genreIds, perPage } = {}) {
-  // Use a generic search term based on genre to approximate discovery
+async function fetchByIds(ids) {
+  const results = await Promise.all(
+    ids.map(async (id) => {
+      try {
+        const data = await get({ i: id });
+        return normalizeListItem(data);
+      } catch {
+        return null;
+      }
+    })
+  );
+  return results.filter(Boolean);
+}
+
+// OMDb doesn't support genre-based discovery. Use curated IMDb IDs when we
+// have them, otherwise fall back to a name-based search approximation.
+export async function discoverMovies({ page = 1, genreIds, perPage = OMDB_PAGE } = {}) {
+  const firstGenre = genreIds ? parseInt(genreIds.split(",")[0]) : null;
+  const curated = firstGenre && CURATED_GENRE_IDS[firstGenre];
+
+  if (curated) {
+    const appPage = parseInt(page);
+    const start = (appPage - 1) * perPage;
+    const slice = curated.slice(start, start + perPage);
+    const results = await fetchByIds(slice);
+    return {
+      results,
+      page: appPage,
+      total_results: curated.length,
+      total_pages: Math.ceil(curated.length / perPage),
+    };
+  }
+
+  // Fall back to keyword search for genres we haven't curated yet.
   const GENRE_SEARCH_TERMS = {
     28: "action", 35: "comedy", 27: "horror", 878: "space",
     18: "drama", 99: "documentary", 12: "adventure", 16: "animation",
@@ -170,7 +250,6 @@ export async function discoverMovies({ page = 1, genreIds, perPage } = {}) {
     37: "western",
   };
 
-  const firstGenre = genreIds ? genreIds.split(",")[0] : null;
   const term = (firstGenre && GENRE_SEARCH_TERMS[firstGenre]) || "movie";
 
   return searchMovies(term, page, perPage);
