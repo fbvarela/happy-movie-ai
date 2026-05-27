@@ -20,6 +20,25 @@ export default function DiscoverPage() {
   const [loading, setLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
 
+  // Seed query/filters from URL on first mount (e.g. /discover?q=..., /discover?genre=35).
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const sp = new URLSearchParams(window.location.search);
+    const q = sp.get("q");
+    if (q) setQuery(q);
+    const rawGenres = sp.get("genres") || sp.get("genre");
+    if (rawGenres) {
+      const ids = rawGenres
+        .split(",")
+        .map((s) => parseInt(s.trim(), 10))
+        .filter((n) => Number.isFinite(n));
+      if (ids.length) {
+        setFilters((f) => ({ ...f, genres: ids }));
+        setShowFilters(true);
+      }
+    }
+  }, []);
+
   const fetchMovies = useCallback(async () => {
     setLoading(true);
     try {
