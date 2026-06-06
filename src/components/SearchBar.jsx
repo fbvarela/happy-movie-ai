@@ -8,8 +8,15 @@ export default function SearchBar({ onSearch, initialValue = "", placeholder }) 
   const [value, setValue] = useState(initialValue);
   const { t } = useLanguage();
   const timerRef = useRef(null);
+  const isFirstRun = useRef(true);
 
   useEffect(() => {
+    // Don't fire onSearch on mount — the parent already knows the initial
+    // value (and re-running it would clobber URL-seeded page/filter state).
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
     clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
       onSearch(value.trim());
