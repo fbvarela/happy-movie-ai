@@ -10,34 +10,63 @@ import Pagination from "@/components/Pagination";
 import { useLanguage } from "@/context/LanguageContext";
 import { ERAS } from "@/constants/filters";
 
+function readInitialFromURL() {
+  if (typeof window === "undefined") {
+    return { query: "", filters: { sortBy: "popularity.desc" }, page: 1, showFilters: false };
+  }
+  const sp = new URLSearchParams(window.location.search);
+  const filters = { sortBy: sp.get("sortBy") || "popularity.desc" };
+  const rawGenres = sp.get("genres") || sp.get("genre");
+  let showFilters = false;
+  if (rawGenres) {
+    const ids = rawGenres
+      .split(",")
+      .map((s) => parseInt(s.trim(), 10))
+      .filter((n) => Number.isFinite(n));
+    if (ids.length) {
+      filters.genres = ids;
+      showFilters = true;
+    }
+  }
+  const voteGte = sp.get("voteGte");
+  if (voteGte) filters.voteGte = voteGte;
+  const language = sp.get("language");
+  if (language) filters.language = language;
+  const era = sp.get("era");
+  if (era) filters.era = era;
+  const pageParam = parseInt(sp.get("page") || "", 10);
+  const page = Number.isFinite(pageParam) && pageParam > 0 ? pageParam : 1;
+  return { query: sp.get("q") || "", filters, page, showFilters };
+}
+
 export default function DiscoverPage() {
   const { t } = useLanguage();
-  const [query, setQuery] = useState("");
-  const [filters, setFilters] = useState({ sortBy: "popularity.desc" });
+  const initial = useState(readInitialFromURL)[0];
+  const [query, setQuery] = useState(initial.query);
+  const [filters, setFilters] = useState(initial.filters);
   const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(initial.page);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [showFilters, setShowFilters] = useState(false);
+  const [showFilters, setShowFilters] = useState(initial.showFilters);
 
-  // Seed query/filters from URL on first mount (e.g. /discover?q=..., /discover?genre=35).
+  // Mirror state into the URL so browser-back from a movie detail restores it.
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const sp = new URLSearchParams(window.location.search);
-    const q = sp.get("q");
-    if (q) setQuery(q);
-    const rawGenres = sp.get("genres") || sp.get("genre");
-    if (rawGenres) {
-      const ids = rawGenres
-        .split(",")
-        .map((s) => parseInt(s.trim(), 10))
-        .filter((n) => Number.isFinite(n));
-      if (ids.length) {
-        setFilters((f) => ({ ...f, genres: ids }));
-        setShowFilters(true);
-      }
+    const sp = new URLSearchParams();
+    if (query) sp.set("q", query);
+    if (filters.genres?.length) sp.set("genres", filters.genres.join(","));
+    if (filters.sortBy && filters.sortBy !== "popularity.desc") sp.set("sortBy", filters.sortBy);
+    if (filters.voteGte) sp.set("voteGte", filters.voteGte);
+    if (filters.language) sp.set("language", filters.language);
+    if (filters.era) sp.set("era", filters.era);
+    if (page > 1) sp.set("page", String(page));
+    const qs = sp.toString();
+    const next = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
+    if (next !== window.location.pathname + window.location.search) {
+      window.history.replaceState(null, "", next);
     }
-  }, []);
+  }, [query, filters, page]);
 
   const fetchMovies = useCallback(async () => {
     setLoading(true);
@@ -92,7 +121,7 @@ export default function DiscoverPage() {
         <h1 className="page-title">{t("discover.title")}</h1>
         <p className="page-sub">{t("discover.subtitle")}</p>
 
-        <SearchBar onSearch={handleSearch} />
+        <SearchBar onSearch={handleSearch} initialValue={query} />
 
         {!query && (
           <>
